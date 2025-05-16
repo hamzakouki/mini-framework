@@ -1,26 +1,20 @@
-import {createelement} from "../framework/index.js"
 
 
-const obj = {
+import { useState } from "../framework/Statemanagement.js";
+
+export function App() {
+  const [count, setCount] = useState(0);
+
+  return {
     tag: "div",
-    attrs: { class: "nameSubm" },
+    attrs: {},
     children: [
+      { tag: "p", children: [{ tag: "text", text: `Count: ${count}` }] },
       {
-        tag: "input",
-        attrs: {
-          type: "text",
-          placeholder: "Insert Name"
-        }
+        tag: "button",
+        attrs: { onClick: () => setCount(c => c + 1) },
+        children: [{ tag: "text", text: "Increment" }],
       },
-      {
-        tag: "input",
-        attrs: {
-          type: "submit",
-          placeholder: "Submit"
-        }
-      }
-    ]
+    ],
   };
-  
-
-  document.body.appendChild(createelement(obj))
+}

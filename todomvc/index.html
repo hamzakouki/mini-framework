@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="module" src="./app.js"></script>
+  <meta charset="UTF-8" />
+  <title>Mini Framework</title>
 </head>
 <body>
+  <div id="app"></div>
+  <script type="module">
+    import { renderAppFn } from "../framework/Statemanagement.js";
+    import { App } from "./app.js";
+
+    const mount = document.getElementById("app");
+    renderAppFn(App, mount);
+  </script>
 </body>
 </html>
