@@ -138,7 +138,7 @@ todos.length > 0 ? {
     {
       tag: "p",
       attrs: {
-        style: `margin-top: 10px; padding: 0; line-height: 1.5;`
+        style: `margin-top: 15px;: 15px;padding: 0px 60px 0px 10px; line-height: 1.5;`
       },
       children: [
         { tag: "text", text: todos.length + " items left!" }
