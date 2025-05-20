@@ -5,7 +5,8 @@ export function createelement(obj) {
 
   const el = document.createElement(obj.tag);
 
-  for (let [key, value] of Object.entries(obj.attrs || {})) {
+ const attributes = obj.attrs || obj.props || obj.attributes || {};
+for (let [key, value] of Object.entries(attributes)) {
     if (key.startsWith('on') && typeof value === 'function') {
       // *********** ngl3o on :  Convert mn "onClick" l "click" ************* 
       const eventName = key.slice(2).toLowerCase();

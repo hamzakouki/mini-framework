@@ -90,7 +90,14 @@ export function App() {
             `
           },
           children: [
+            {
+              tag: "input",
+              attributes: {
+                type: "checkbox"
+              }
+            },
             { tag: "text", text: todo },
+          
             {
               tag: "button",
               attrs: {
