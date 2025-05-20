@@ -1,5 +1,7 @@
-to do 
 
-- State Management useeffect 
+- State Management done 
+
+to do :
+
 - Event Handling
 - TodoMVC 
