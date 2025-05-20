@@ -16,7 +16,9 @@ export function useState(initialValue) {
     hookStates[currentIndex] = typeof newValue === 'function'
       ? newValue(hookStates[currentIndex])
       : newValue;
+      requestAnimationFrame(() => {
     renderApp();
+  });
   };
 
   const value = hookStates[currentIndex];
