@@ -4,7 +4,7 @@ export function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    console.log("Current Todos:", todos);
+    console.log(todos);
   }, [todos]);
 
   return {
