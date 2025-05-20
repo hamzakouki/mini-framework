@@ -175,6 +175,9 @@ todos.length > 0 ? {
         `,
         onMouseOver: (e) => (e.target.style.borderColor = "#777"),
         onMouseOut: (e) => (e.target.style.borderColor = "transparent"),
+        onClick: () => {
+     // navigateTo("/active");  kouki mli tzid rout lgha hna 
+      }
       },
       children: [{ tag: "text", text: "Active" }]
     },
@@ -192,6 +195,9 @@ todos.length > 0 ? {
         `,
         onMouseOver: (e) => (e.target.style.borderColor = "#777"),
         onMouseOut: (e) => (e.target.style.borderColor = "transparent"),
+         onClick: () => {
+       //  navigateTo("/completed");  kouki mli tzid route lgha hna 
+      }
       },
       children: [{ tag: "text", text: "Completed" }]
     }
@@ -200,3 +206,14 @@ todos.length > 0 ? {
     ]
   };
 }
+
+
+
+
+
+// test dyal route w sf 
+
+// function navigateTo(route) {
+//   window.history.pushState({}, "", route);
+//   renderApp();
+// }
