@@ -7,12 +7,14 @@ export function createelement(obj) {
 
   for (let [key, value] of Object.entries(obj.attrs || {})) {
     if (key.startsWith('on') && typeof value === 'function') {
-      // Convert "onClick" → "click"
+      // *********** ngl3o on :  Convert mn "onClick" l "click" ************* 
       const eventName = key.slice(2).toLowerCase();
       el.addEventListener(eventName, value);
-    } else {
-      el.setAttribute(key, value);
-    }
+    } else if (key === "value" && (obj.tag === "input" || obj.tag === "textarea")) {
+    el.value = value; // ← Fix here
+  } else {
+    el.setAttribute(key, value);
+  }
   }
 
   for (let childobj of obj.children || []) {

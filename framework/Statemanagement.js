@@ -75,6 +75,13 @@ export function renderAppFn(fn, mountPoint) {
 export function renderApp() {
   hookIndex = 0;
   effectIndex = 0;
-  rootEl.innerHTML = "";
-  rootEl.appendChild(createelement(appFn()));
+
+  const newTree = createelement(appFn());
+  const oldTree = rootEl.firstChild;
+
+  if (oldTree) {
+    rootEl.replaceChild(newTree, oldTree); // replaces only child
+  } else {
+    rootEl.appendChild(newTree); // first render
+  }
 }
