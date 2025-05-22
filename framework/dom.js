@@ -1,7 +1,9 @@
 export function h(tag, attrs = {}, ...children) {
+  const key = attrs.key;
   return {
     tag,
     attrs,
+    key,
     children: children.flat().map(child =>
       typeof child === "string" ? { tag: "text", text: child } : child
     )
@@ -30,15 +32,19 @@ export function createElement(vnode) {
     el.appendChild(createElement(child));
   }
 
+  // 👇 Lifecycle hook to trigger focus or setup after creation
+  if (typeof vnode.attrs?.oncreate === "function") {
+    requestAnimationFrame(() => vnode.attrs.oncreate(el));
+  }
+
   return el;
 }
 
 function changed(v1, v2) {
-  return (
-    typeof v1 !== typeof v2 ||
-    (v1.tag === "text" && v1.text !== v2.text) ||
-    v1.tag !== v2.tag
-  );
+  if (typeof v1 !== typeof v2) return true;
+  if (v1.tag === "text" && v2.tag === "text") return v1.text !== v2.text;
+  if (v1.tag !== v2.tag) return true;
+  return false; // Let diffing and attributes handle differences
 }
 
 function updateAttributes(el, newAttrs = {}, oldAttrs = {}) {

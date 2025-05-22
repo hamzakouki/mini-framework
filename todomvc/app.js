@@ -77,26 +77,27 @@ export function TodoApp() {
           },
             todo.isEditing
               ? h("input", {
-                  class: "edit",
-                  type: "text",
-                  value: todo.text,
-                  autofocus: true,
-                  onblur: (e) => {
+                key: `edit-${i}`, // Important for tracking
+                class: "edit",
+                type: "text",
+                value: todo.text,
+                oncreate: (el) => el.focus(), // 👈 Focus manually when input is created
+                onblur: (e) => {
+                  const updated = [...todos];
+                  updated[i].text = todo.text;
+                  setTodos(updated);
+                  setEditing(i, false);
+                },
+                onkeydown: (e) => {
+                  if (e.key === "Enter") {
                     const updated = [...todos];
-                    updated[i].text = todo.text;
-                    console.log(updated[i].text);
+                    updated[i].text = e.target.value;
                     setTodos(updated);
-                    setEditing(i, false); 
-                  },
-                  onkeydown: (e) => {
-                    if (e.key === "Enter") {
-                      const updated = [...todos];
-                      updated[i].text = e.target.value;
-                      setTodos(updated);
-                      setEditing(i, false); // Exit edit mode
-                    }
+                    setEditing(i, false);
                   }
-                })
+                }
+              })
+
               : h("div", { class: "view" },
                   h("input", {
                     class: "toggle",
