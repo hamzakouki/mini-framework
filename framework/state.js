@@ -1,8 +1,7 @@
-import { createelement } from "./index.js";
+import { createElement, updateElement } from "./dom.js";
 
 const hookStates = [];
 let hookIndex = 0;
-
 const effectStates = [];
 let effectIndex = 0;
 
@@ -11,12 +10,11 @@ export function useState(initialValue) {
   if (hookStates[currentIndex] === undefined) {
     hookStates[currentIndex] = initialValue;
   }
-
   const setState = (newValue) => {
     hookStates[currentIndex] = typeof newValue === 'function'
       ? newValue(hookStates[currentIndex])
       : newValue;
-      requestAnimationFrame(() => {
+       requestAnimationFrame(() => {
     renderApp();
   });
   };
@@ -25,9 +23,6 @@ export function useState(initialValue) {
   hookIndex++;
   return [value, setState];
 }
-
-
-
 
 
 export function useEffect(callback, deps = []) {
@@ -65,8 +60,11 @@ if (hasChanged) {
   effectIndex++;
 }
 
+
+
 let rootEl;
 let appFn;
+let oldVNode = null;
 
 export function renderAppFn(fn, mountPoint) {
   rootEl = mountPoint;
@@ -77,13 +75,8 @@ export function renderAppFn(fn, mountPoint) {
 export function renderApp() {
   hookIndex = 0;
   effectIndex = 0;
-
-  const newTree = createelement(appFn());
-  const oldTree = rootEl.firstChild;
-
-  if (oldTree) {
-    rootEl.replaceChild(newTree, oldTree); // replaces only child
-  } else {
-    rootEl.appendChild(newTree); // first render
-  }
+  const newVNode =  appFn();
+  if (!rootEl) throw new Error("Mount point not set");
+  updateElement(rootEl, newVNode, oldVNode);
+  oldVNode = newVNode;
 }

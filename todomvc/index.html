@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Mini Framework</title>
+  <link rel="stylesheet" href="style.css">
+    <script type="module" src="./app.js"></script>
 </head>
 <body>
   <div id="app"></div>
-  <script type="module">
-    import { renderAppFn } from "../framework/Statemanagement.js";
-    import { App } from "./app.js";
 
-    const mount = document.getElementById("app");
-    renderAppFn(App, mount);
-  </script>
 </body>
 </html>
